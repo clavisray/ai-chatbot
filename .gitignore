@@ -1,24 +1,36 @@
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
-
-node_modules
-dist
-dist-ssr
+# =====================
+# FRONTEND - React
+# =====================
+node_modules/
+dist/
+coverage/
 *.local
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
+# =====================
+# BACKEND - Spring Boot
+# =====================
+target/
+*.class
+*.log
+hs_err_pid*
+
+# =====================
+# IDE - IntelliJ / VS Code
+# =====================
+.idea/
+*.iml
+.vscode/
+
+# =====================
+# SYSTEM
+# =====================
 .DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+Thumbs.db
+
+# =====================
+# ENV - API KEYS
+# =====================
+.env
+.env.*
+!.env.example
+
