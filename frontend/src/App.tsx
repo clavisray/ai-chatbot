@@ -1,10 +1,13 @@
+import { getAnswer } from "./api/geminiApi"
+import Chatbot from "./Chatbot"
+
+
 function App() {
+  //const answer = await getAnswer(message);
 
   return (
     <>
-      <div>
-
-      </div>
+      <Chatbot />
     </>
   )
 }
