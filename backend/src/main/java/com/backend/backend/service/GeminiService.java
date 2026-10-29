@@ -20,7 +20,7 @@ public class GeminiService {
 
         CreateModelInteraction params =
                 CreateModelInteraction.builder()
-                        .model(Model.of("gemini-3.8-flash"))
+                        .model(Model.of("gemini-3.5-flash"))
                         .input(InteractionsInput.of(message))
                         .build();
 
