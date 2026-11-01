@@ -14,10 +14,15 @@ function Chatbot() {
     const [content, setContent] = useState("")
     const [messages, setMessages] = useState<Message[]>([]);
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("")
 
     async function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
         e.preventDefault();
+
+        if (!content.trim() || loading) return;
+
         setContent("");
+        setError("")
 
         setMessages(prev => [
             ...prev,
@@ -28,11 +33,11 @@ function Chatbot() {
             }
         ]);
         
-        setLoading(true);
-        const response = await getAnswer(content);
-        
-        
-        setMessages(prev => [
+        try {
+            setLoading(true);
+            const response = await getAnswer(content);
+
+            setMessages(prev => [
             ...prev,
             {
                 id: crypto.randomUUID(),
@@ -40,8 +45,14 @@ function Chatbot() {
                 content: response
             }
         ]);
-        setLoading(false);
 
+        } catch (error) {
+            console.error(error);
+            setError("Nie udało się uzyskać odpowiedzi. Spróbuj ponownie.")
+        
+        } finally {
+            setLoading(false);
+        }
     }
 
     console.log(content);
@@ -84,6 +95,11 @@ function Chatbot() {
                                 Thinking...
                             </div>
                         )}
+                        {error && (
+                            <p className="text-red-500">
+                                {error}
+                            </p>
+                        )}
 
                     </div>
 
@@ -103,8 +119,9 @@ function Chatbot() {
                             <button 
                                 className="absolute bottom-4 right-4 flex items-center justify-center cursor-pointer rounded-3xl bg-gradient-to-r from-lime-200 via-sky-100 to-indigo-200 px-2 py-2 font-bold opacity-50 transition hover:text-sky-700 hover:opacity-100"
                                 type="submit"
+                                disabled={loading}
                                 >
-                                    <ArrowUp  />
+                                    {loading ? "Wysyłanie..." : <ArrowUp /> }
                             </button>
                         </div>
                         
